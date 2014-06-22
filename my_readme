@@ -1,0 +1,50 @@
+ctm est ap.dat 50 rand /home/xx/workspace/myC/ctm-dist settings.txt
+
+
+
+20newsgroup
+ctm est train_for_lda_150.data 50 rand /home/xx/workspace/myC/ctm-dist settings.txt
+
+
+
+-------------------------------这是分隔符-----------------------------------------
+代码错误
+Dear all:
+
+Recently I was reading the code of “Correlated Topic Model”, which can be found in http://www.cs.princeton.edu/~blei/ctm-c/index.html .
+
+I found two different version of converting $phi$ to $phi_sum$; These two version are listed as follows:
+
+Version 1.
+int opt_lambda(llna_var_param * var, doc * doc, llna_model * mod) 
+{
+    …..
+    b.sum_phi = gsl_vector_alloc(mod->k-1);
+    gsl_vector_set_zero(b.sum_phi);
+    for (i = 0; i < doc->nterms; i++)
+    {
+        for (j = 0; j < mod->k-1; j++)
+        {
+            vset(b.sum_phi, j,
+                 vget(b.sum_phi, j) +
+                 ((double) doc->count[i]) * mget(var->phi, i, j));
+        }
+    }
+……
+}
+
+Version 2.
+void expectation(…)
+{ …..
+    col_sum(var->phi, phi_sum);
+  ……
+}
+
+Version 2 has omitted the  doc->count[i]),  and I don’t think the second version is accurate.
+Question: Why not use version 1 instead of version 2 in all the functions?
+
+
+-------------------------------这是分隔符-----------------------------------------
+
+
+
