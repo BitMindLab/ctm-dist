@@ -87,7 +87,7 @@ void expectation(corpus* corpus, llna_model* model, llna_ss* ss,
         gsl_matrix_set_row(corpus_nu, i, var->nu);
 
         col_sum(var->phi, phi_sum);
-        gsl_matrix_set_row(corpus_phi_sum, i, phi_sum);
+        gsl_matrix_set_row(corpus_phi_sum, i, phi_sum);  // 这里的corpus_phi_sum，后面用到了吗？没用到貌似就可以删除了。
         free_llna_var_param(var);
     }
     gsl_vector_free(phi_sum);
