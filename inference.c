@@ -464,9 +464,9 @@ void opt_nu_i(int i, llna_var_param * var, llna_model * mod, doc * d)
         }
         // f = f_nu_i(nu_i, i, var, mod, d);
         // printf("%5.5f  %5.5f \n", nu_i, f);
-        df = df_nu_i(nu_i, i, var, mod, d);
+        df = df_nu_i(nu_i, i, var, mod, d);   // 这里是梯度上升法，求f最大值
         d2f = d2f_nu_i(nu_i, i, var, mod, d);
-        log_nu_i = log_nu_i - (df*nu_i)/(d2f*nu_i*nu_i+df*nu_i);
+        log_nu_i = log_nu_i - (df*nu_i)/(d2f*nu_i*nu_i+df*nu_i);  // 梯度下降法与梯度上升法的牛顿迭代公式相同
     }
     while (fabs(df) > NEWTON_THRESH);  //这里有时会出现无限循环
 
